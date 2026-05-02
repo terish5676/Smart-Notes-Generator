@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ### 2. Get a Gemini API key
 
-1. Open urlGoogle AI Studio[https://aistudio.google.com/](https://aistudio.google.com/)
+1. Open url Google AI Studio[https://aistudio.google.com/](https://aistudio.google.com/)
 2. Create an API key
 3. Copy the generated key
 
