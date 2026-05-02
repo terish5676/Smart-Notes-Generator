@@ -1,0 +1,6 @@
+flask>=3.0.0
+Pillow>=10.4.0
+pytesseract>=0.3.13
+google-genai>=1.10.0
+werkzeug>=3.0.0
+python-dotenv>=1.0.1

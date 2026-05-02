@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Board Notes Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">📒</span>
+        <div class="logo-text">
+          <span class="logo-main">SmartNotes</span>
+          <span class="logo-sub">Board → Notes Generator</span>
+        </div>
+        <span class="model-badge">✦ Gemini 2.5 Flash</span>
+      </div>
+      <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <!-- Main App -->
+  <main class="app-container">
+
+    <!-- Upload Panel -->
+    <div class="upload-panel" id="uploadPanel">
+      <div class="panel-header">
+        <h2 class="panel-title">Upload Board Image</h2>
+        <p class="panel-subtitle">Snap a photo of any classroom board and get beautiful study notes instantly</p>
+      </div>
+
+      <!-- Drop Zone -->
+      <div class="dropzone" id="dropzone">
+        <div class="dropzone-inner">
+          <div class="drop-icon">📸</div>
+          <p class="drop-label">Drag & drop your board photo here</p>
+          <p class="drop-sub">or</p>
+          <label class="upload-btn" for="fileInput">Choose Image</label>
+          <input type="file" id="fileInput" accept="image/*" hidden/>
+          <p class="drop-formats">PNG · JPG · WEBP · BMP · GIF</p>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-area" id="previewArea" style="display:none">
+        <div class="preview-header">
+          <span class="preview-label">📷 Preview</span>
+          <button class="clear-btn" id="clearBtn">✕ Remove</button>
+        </div>
+        <img id="previewImg" src="" alt="Board preview" class="preview-img"/>
+        <p class="preview-filename" id="previewFilename"></p>
+      </div>
+
+      <!-- Actions -->
+      <div class="action-row">
+        <button class="generate-btn" id="generateBtn" disabled>
+          <span class="btn-icon">✨</span>
+          Generate Notes
+        </button>
+        <button class="sample-btn" id="sampleBtn">
+          <span class="btn-icon">🎓</span>
+          Try Sample
+        </button>
+      </div>
+
+      <!-- Tips -->
+      <div class="tips-row">
+        <div class="tip">💡 <strong>Best results:</strong> Clear, well-lit board photos with minimal glare</div>
+        <div class="tip">🤖 <strong>Powered by:</strong> <code>gemini-2.5-flash</code> with automatic Pro fallback</div>
+      </div>
+    </div>
+
+    <!-- Output Panel -->
+    <div class="output-panel" id="outputPanel" style="display:none">
+      <div class="output-header">
+        <h2 class="output-title">Your Study Notes</h2>
+        <div class="output-actions">
+          <button class="download-btn" id="downloadBtn">⬇ Download PDF</button>
+          <button class="copy-btn" id="copyBtn">📋 Copy Text</button>
+          <button class="new-btn" id="newBtn">↩ New Image</button>
+        </div>
+      </div>
+
+      <!-- Notes render area -->
+      <div class="notes-wrapper" id="notesWrapper">
+        <div class="notes-render" id="notesRender"></div>
+      </div>
+
+      <!-- OCR preview (collapsible) -->
+      <details class="ocr-details" id="ocrDetails" style="display:none">
+        <summary>🔍 View raw OCR text</summary>
+        <pre id="ocrPreview" class="ocr-pre"></pre>
+      </details>
+    </div>
+
+  </main>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay" style="display:none">
+    <div class="loader-card">
+      <div class="pencil-loader">
+        <div class="pencil-body"></div>
+        <div class="pencil-tip"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <p class="loader-title">Generating Notes...</p>
+      <p class="loader-sub" id="loaderSub">Extracting text from board</p>
+      <div class="loader-steps">
+        <div class="step active" id="step1">📷 OCR Extraction</div>
+        <div class="step" id="step2">🤖 AI Processing</div>
+        <div class="step" id="step3">✨ Formatting Notes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
